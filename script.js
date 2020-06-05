@@ -74,6 +74,16 @@ function generatePassword() {
 			allChars.push(allSpcChars[i]);
 		}
 	}
+
+	// BUILD RANDOM STRING OF SELECTED LENGTH FROM ALL SELECTED CHARACTERS
+	var passwordArr = [];
+	var charInd;
+	// build array of numChars length storing value at randomly selected index in each element
+	for (var i = 0; i < numChars; i++) {
+		charInd = Math.floor(Math.random() * allChars.length);
+		passwordArr.push(allChars[charInd]);
+	}
+	return passwordArr.join('');
 }
 
 // Get references to the #generate element
