@@ -33,23 +33,36 @@ function generatePassword() {
 
 // PROMPT FOR CHARACTER TYPES TO USE
 function selectChars(numChars) {
-	var lowCase = confirm('Would you like to include LOWERCASE characters in password? (Click OK for YES)');
-	var upCase = confirm('Would you like to include UPPERCASE characters in password? (Click OK for YES)');
-	var nums = confirm('Would you like to include NUMBERS in your password? (Click OK for YES)');
+	var lowCase = confirm(
+		'Would you like to include LOWERCASE characters in password? (Click OK for YES)'
+	);
+	var upCase = confirm(
+		'Would you like to include UPPERCASE characters in password? (Click OK for YES)'
+	);
+	var nums = confirm(
+		'Would you like to include NUMBERS in your password? (Click OK for YES)'
+	);
 	var specials = confirm(
 		'Would you like to include SPECIAL CHARACTERS in your password? (Click OK for YES)'
 	);
 
 	if (lowCase === false && upCase === false && nums === false && specials === false) {
 		alert('You must choose at least one type of character to use for your password');
-		lowCase = confirm('Would you like to include LOWERCASE characters in password? (Click OK for YES)');
-		upCase = confirm('Would you like to include UPPERCASE characters in password? (Click OK for YES)');
-		nums = confirm('Would you like to include NUMBERS in your password? (Click OK for YES)');
+		lowCase = confirm(
+			'Would you like to include LOWERCASE characters in password? (Click OK for YES)'
+		);
+		upCase = confirm(
+			'Would you like to include UPPERCASE characters in password? (Click OK for YES)'
+		);
+		nums = confirm(
+			'Would you like to include NUMBERS in your password? (Click OK for YES)'
+		);
 		specials = confirm(
 			'Would you like to include SPECIAL CHARACTERS in your password? (Click OK for YES)'
 		);
 	}
 
+  // build object for criteria config
 	var criteria = {
 		numChars : numChars,
 		lowCase  : lowCase,
@@ -61,35 +74,30 @@ function selectChars(numChars) {
 	createPassword(criteria);
 }
 
-// spread instead of for loop
+// UNTIL PW LENGTH IS FULFILLED, LOOP OVER ALL CHARACTER TYPES & (DEPENDING ON CRITERIA BOOLEAN) CALL SUBROUTINE TO GENERATE RANDO INDEX IN CHAR SET TO PUSH TO PW ARRAY 
 function createPassword(criteria) {
-	var allChars = [];
-	if (criteria.lowCase) {
-		allChars.push(...allLowChars);
-	}
-	if (criteria.upCase) {
-		allChars.push(...allUpChars);
-	}
-	if (criteria.nums) {
-		allChars.push(...allNums);
-	}
-	if (criteria.specials) {
-		allChars.push(...allSpcChars);
-	}
-	buildPassword(allChars, criteria.numChars);
-}
-
-// BUILD RANDOM STRING OF SELECTED LENGTH FROM ALL SELECTED CHARACTERS
-function buildPassword(arr, numChars) {
 	var passwordArr = [];
-	var charInd;
-	// build array of numChars length storing value at randomly selected index in each element
-	for (var i = 0; i < numChars; i++) {
-		charInd = Math.floor(Math.random() * arr.length);
-		passwordArr.push(arr[charInd]);
+	while (passwordArr.length < criteria.numChars) {
+		if (criteria.lowCase) {
+      passwordArr.push(allLowChars[genRanIdx(allLowChars)]);
+		}
+		if (criteria.upCase) {
+      passwordArr.push(allUpChars[genRanIdx(allUpChars)]);
+		}
+		if (criteria.nums) {
+      passwordArr.push(allNums[genRanIdx(allNums)]);
+		}
+		if (criteria.specials) {
+      passwordArr.push(allSpcChars[genRanIdx(allSpcChars)]);
+		}
 	}
 	var passWordStr = passwordArr.join('');
 	writePassword(passWordStr);
+}
+
+// GENERATE RANDOM INDEX FROM CHAR SETS
+function genRanIdx(charSet) {
+	return Math.floor(Math.random() * charSet.length);
 }
 
 // Write password to the #password input
