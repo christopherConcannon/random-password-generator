@@ -51,6 +51,29 @@ function generatePassword() {
 		nums     : nums,
 		specials : specials
 	};
+
+	// CREATE ARRAY TO HOLD ALL CHARACTERS FROM SELECTED TYPES
+	var allChars = [];
+	if (criteria.lowCase) {
+		for (var i = 0; i < allLowChars.length; i++) {
+			allChars.push(allLowChars[i]);
+		}
+	}
+	if (criteria.upCase) {
+		for (var i = 0; i < allUpChars.length; i++) {
+			allChars.push(allUpChars[i]);
+		}
+	}
+	if (criteria.nums) {
+		for (var i = 0; i < allNums.length; i++) {
+			allChars.push(allNums[i]);
+		}
+	}
+	if (criteria.specials) {
+		for (var i = 0; i < allSpcChars.length; i++) {
+			allChars.push(allSpcChars[i]);
+		}
+	}
 }
 
 // Get references to the #generate element
