@@ -11,7 +11,7 @@ var allUpChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
 var allNums = '0123456789'.split('');
 var allSpcChars = ' !"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'.split('');
 
-// PROMPT FOR PASSWORD LENGTH & VALIDATE RESPONSE
+// // PROMPT FOR PASSWORD LENGTH & VALIDATE RESPONSE
 function generatePassword() {
 	var numChars = prompt(
 		'How many characters would you like in your password (Enter a value between 8 and 128)'
@@ -62,7 +62,7 @@ function selectChars(numChars) {
 		);
 	}
 
-  // build object for criteria config
+	// build object for criteria config
 	var criteria = {
 		numChars : numChars,
 		lowCase  : lowCase,
@@ -74,21 +74,21 @@ function selectChars(numChars) {
 	createPassword(criteria);
 }
 
-// UNTIL PW LENGTH IS FULFILLED, LOOP OVER ALL CHARACTER TYPES & (DEPENDING ON CRITERIA BOOLEAN) CALL SUBROUTINE TO GENERATE RANDO INDEX IN CHAR SET TO PUSH TO PW ARRAY 
+// UNTIL PW LENGTH IS FULFILLED, LOOP OVER ALL CHARACTER TYPES & (DEPENDING ON CRITERIA BOOLEAN) CALL SUBROUTINE TO GENERATE RANDO INDEX IN CHAR SET TO PUSH TO PW ARRAY
 function createPassword(criteria) {
 	var passwordArr = [];
 	while (passwordArr.length < criteria.numChars) {
 		if (criteria.lowCase) {
-      passwordArr.push(allLowChars[genRanIdx(allLowChars)]);
+			passwordArr.push(allLowChars[genRanIdx(allLowChars)]);
 		}
 		if (criteria.upCase) {
-      passwordArr.push(allUpChars[genRanIdx(allUpChars)]);
+			passwordArr.push(allUpChars[genRanIdx(allUpChars)]);
 		}
 		if (criteria.nums) {
-      passwordArr.push(allNums[genRanIdx(allNums)]);
+			passwordArr.push(allNums[genRanIdx(allNums)]);
 		}
 		if (criteria.specials) {
-      passwordArr.push(allSpcChars[genRanIdx(allSpcChars)]);
+			passwordArr.push(allSpcChars[genRanIdx(allSpcChars)]);
 		}
 	}
 	var passWordStr = passwordArr.join('');
